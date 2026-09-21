@@ -614,7 +614,7 @@ prv_read_can_received_msg(CAN_HandleTypeDef* hcan, uint32_t fifo, uint32_t fifo_
  *                      the configuration information for the specified FDCAN.
  * \param[in]       RxFifo0ITs: indicates which Rx FIFO 0 interrupts are signaled.
  */
-void
+__weak void
 HAL_FDCAN_RxFifo0Callback(FDCAN_HandleTypeDef* hfdcan, uint32_t RxFifo0ITs) {
     if (RxFifo0ITs & FDCAN_IT_RX_FIFO0_NEW_MESSAGE) {
         prv_read_can_received_msg(hfdcan, FDCAN_RX_FIFO0, RxFifo0ITs);
@@ -627,7 +627,7 @@ HAL_FDCAN_RxFifo0Callback(FDCAN_HandleTypeDef* hfdcan, uint32_t RxFifo0ITs) {
  *                      the configuration information for the specified FDCAN.
  * \param[in]       RxFifo1ITs: indicates which Rx FIFO 0 interrupts are signaled.
  */
-void
+__weak void
 HAL_FDCAN_RxFifo1Callback(FDCAN_HandleTypeDef* hfdcan, uint32_t RxFifo1ITs) {
     if (RxFifo1ITs & FDCAN_IT_RX_FIFO1_NEW_MESSAGE) {
         prv_read_can_received_msg(hfdcan, FDCAN_RX_FIFO1, RxFifo1ITs);
@@ -640,7 +640,7 @@ HAL_FDCAN_RxFifo1Callback(FDCAN_HandleTypeDef* hfdcan, uint32_t RxFifo1ITs) {
  *                      the configuration information for the specified FDCAN.
  * \param[in]       BufferIndexes: Bits of successfully sent TX buffers
  */
-void
+__weak void
 HAL_FDCAN_TxBufferCompleteCallback(FDCAN_HandleTypeDef* hfdcan, uint32_t BufferIndexes) {
     CANModule_local->firstCANtxMessage = false;            /* First CAN message (bootup) was sent successfully */
     CANModule_local->bufferInhibitFlag = false;            /* Clear flag from previous message */
@@ -678,7 +678,7 @@ HAL_FDCAN_TxBufferCompleteCallback(FDCAN_HandleTypeDef* hfdcan, uint32_t BufferI
  * \param[in]       hcan: pointer to an CAN_HandleTypeDef structure that contains
  *                      the configuration information for the specified CAN.
  */
-void
+__weak void
 HAL_CAN_RxFifo0MsgPendingCallback(CAN_HandleTypeDef* hcan) {
     prv_read_can_received_msg(hcan, CAN_RX_FIFO0, 0);
 }
@@ -688,7 +688,7 @@ HAL_CAN_RxFifo0MsgPendingCallback(CAN_HandleTypeDef* hcan) {
  * \param[in]       hcan: pointer to an CAN_HandleTypeDef structure that contains
  *                      the configuration information for the specified CAN.
  */
-void
+__weak void
 HAL_CAN_RxFifo1MsgPendingCallback(CAN_HandleTypeDef* hcan) {
     prv_read_can_received_msg(hcan, CAN_RX_FIFO1, 0);
 }
@@ -733,17 +733,17 @@ CO_CANinterrupt_TX(CO_CANmodule_t* CANmodule, uint32_t MailboxNumber) {
     }
 }
 
-void
+__weak void
 HAL_CAN_TxMailbox0CompleteCallback(CAN_HandleTypeDef* hcan) {
     CO_CANinterrupt_TX(CANModule_local, CAN_TX_MAILBOX0);
 }
 
-void
+__weak void
 HAL_CAN_TxMailbox1CompleteCallback(CAN_HandleTypeDef* hcan) {
     CO_CANinterrupt_TX(CANModule_local, CAN_TX_MAILBOX0);
 }
 
-void
+__weak void
 HAL_CAN_TxMailbox2CompleteCallback(CAN_HandleTypeDef* hcan) {
     CO_CANinterrupt_TX(CANModule_local, CAN_TX_MAILBOX0);
 }
